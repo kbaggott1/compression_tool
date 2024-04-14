@@ -3,6 +3,7 @@
 #include <string.h>
 #define ASCII_SIZE 128
 
+
 typedef struct {
     char* data;
     int* freq;
@@ -25,6 +26,7 @@ void add_char(FrequencyTable* pFt, char c) {
         }
     }
 }
+
 void swap(int* a, int* b, char* ca, char* cb) {
     int temp = *a;
     *a = *b;

@@ -3,6 +3,7 @@
 #include "cmpr.h"
 #include <string.h>
 
+
 char* read_line(FILE* pFile) {
     size_t bufferSize = 1000;
     char* line = malloc(bufferSize);
