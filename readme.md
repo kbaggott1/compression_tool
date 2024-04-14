@@ -10,7 +10,7 @@ Huffman coding is a popular lossless data compression algorithm that's based on 
 ## Step 1: Frequency Table Construction 🔢
 The first step in Huffman coding is to build a frequency table that records how many times each data item (such as a character in text data) appears. This frequency information is used to build the Huffman tree.
 
-- [x] Completed in this repo
+✅ Completed in this repo
 
 ## Step 2: Building the Huffman Tree 🌳
 A Huffman tree is a binary tree where each leaf node represents a data item (a character, for example), and each internal node represents a combined frequency of its child nodes.
@@ -23,7 +23,7 @@ A Huffman tree is a binary tree where each leaf node represents a data item (a c
    - Insert the new node back into the priority queue.
    - Repeat until there is only one node left in the queue, which becomes the root of the Huffman tree.
 
-- [ ] Completed in this repo
+❌ Completed in this repo
 
 ## Step 3: Generating Codes 🧑‍💻
 Once the Huffman tree is constructed, the next step is to generate the codes for each data item.
@@ -31,11 +31,13 @@ Once the Huffman tree is constructed, the next step is to generate the codes for
 - Traverse the tree from the root to each leaf node.
 - Assign a '0' for every left branch and a '1' for every right branch.
 - The sequence of bits collected along the path from the root to a leaf node forms the code for the data item represented by that leaf.
-- [ ] Completed in this repo
+
+❌ Completed in this repo
 
 ## Step 4: Encoding Data 🔒
 Using the codes generated from the Huffman tree, replace each data item in the original dataset with its corresponding Huffman code. This encoded data is what gets stored or transmitted, achieving compression.
-- [ ] Completed in this repo
+
+❌ Completed in this repo
 
 ## Step 5: Decoding Data 🔓
 To decode the data encoded with Huffman coding, you simply need the encoded data and the Huffman tree.
@@ -44,7 +46,8 @@ To decode the data encoded with Huffman coding, you simply need the encoded data
 - Each '0' means move to the left child of the current node, and each '1' means move to the right child.
 - When you reach a leaf node, you've found the corresponding data item. Record that item as part of the decoded output.
 - Repeat this process until all bits are consumed.
-- [ ] Completed in this repo
+
+❌ Completed in this repo
 
 ## Practical Considerations 😁
 - **Storing the Tree**: For Huffman coding to be practical, the Huffman tree itself (or some equivalent structure like the frequency table) must be stored along with the encoded data. Otherwise, the recipient won't be able to decode the data.
