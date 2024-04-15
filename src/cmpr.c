@@ -11,7 +11,6 @@ char* cmpr_compress(char* fileContents) {
         printf("HERE %c:%d\n", pFt->data[i], pFt->freq[i]);
     }
     
-
-    free(pFt);
+    freqtable_free(pFt);
     return NULL;
 }

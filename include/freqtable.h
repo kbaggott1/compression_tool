@@ -9,5 +9,6 @@ typedef struct {
 } FrequencyTable;
 
 FrequencyTable* freqtable_init(char* fileContents);
+void freqtable_free(FrequencyTable* pFt);
 
 #endif

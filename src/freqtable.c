@@ -61,6 +61,12 @@ void quick_sort(FrequencyTable* pFt, int low, int high) {
     }
 }
 
+void freqtable_free(FrequencyTable* pFt) {
+    free(pFt->data);
+    free(pFt->freq);
+    free(pFt);
+}
+
 FrequencyTable* freqtable_init(char* fileContents) {
     FrequencyTable* pFt = malloc(sizeof(FrequencyTable));
 
