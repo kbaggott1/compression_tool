@@ -23,7 +23,7 @@ A Huffman tree is a binary tree where each leaf node represents a data item (a c
    - Insert the new node back into the priority queue.
    - Repeat until there is only one node left in the queue, which becomes the root of the Huffman tree.
 
-❌ Completed in this repo
+✅ Completed in this repo
 
 ## Step 3: Generating Codes 🧑‍💻
 Once the Huffman tree is constructed, the next step is to generate the codes for each data item.

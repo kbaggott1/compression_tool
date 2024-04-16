@@ -2,20 +2,20 @@
 #include <stdlib.h>
 #include "freqtable.h"
 
+typedef struct Node {
+    struct Node* parent;
+    struct Node* left;
+    struct Node* right;
+    char data;
+    int weight;
+} Node;
+
 typedef struct {
     Node** queue;
     int size;
     int capacity;
     
 } PriorityQueue;
-
-typedef struct {
-    Node* parent;
-    Node* left;
-    Node* right;
-    char data;
-    int weight;
-} Node;
 
 Node* create_node(char data, int weight) {
     Node* node = malloc(sizeof(Node));
@@ -28,22 +28,6 @@ Node* create_node(char data, int weight) {
     node->weight = weight;
 
     return node;
-}
-
-PriorityQueue* pq_init(FrequencyTable* pFt) {
-    PriorityQueue* pPQ = malloc(sizeof(PriorityQueue));
-    pPQ->queue = malloc(pFt->size * sizeof(Node*));
-    pPQ->size = 0;
-    pPQ->capacity = pFt->size;
-    Node* pNodeTemp;
-
-    for(int i = 0; i < pFt->size - 1; i++) {
-        pNodeTemp = create_node(pFt->data[i], pFt->freq[i]);
-
-        if(pNodeTemp) {
-            pq_enqueue(pPQ, pNodeTemp);
-        }  
-    }
 }
 
 int pq_enqueue(PriorityQueue* pPQ, Node* pNewNode) {
@@ -59,7 +43,6 @@ int pq_enqueue(PriorityQueue* pPQ, Node* pNewNode) {
         pPQ->queue = temp;
     }
 
-    Node* pNode;
     int i;
 
     for(i = 0; i < pPQ->size; i++) {
@@ -89,16 +72,60 @@ Node* pq_dequeue(PriorityQueue* pPQ) {
         pPQ->queue[i - 1] = pPQ->queue[i];
     }
 
+    pPQ->size--;
     return node;
 }
 
+PriorityQueue* pq_init(FrequencyTable* pFt) {
+    PriorityQueue* pPQ = malloc(sizeof(PriorityQueue));
+    pPQ->queue = malloc(pFt->size * sizeof(Node*));
+    pPQ->size = 0;
+    pPQ->capacity = pFt->size;
+    Node* pNodeTemp;
+
+    for(int i = 0; i < pFt->size - 1; i++) {
+        pNodeTemp = create_node(pFt->data[i], pFt->freq[i]);
+
+        if(pNodeTemp) {
+            pq_enqueue(pPQ, pNodeTemp);
+        }  
+    }
+
+    return pPQ;
+}
 
 Node* hufftree_init(FrequencyTable* pFt) {
     PriorityQueue* pPQ = pq_init(pFt);
-    
-    return NULL;
+    Node *node1, *node2, *internalNode;
+
+    while(pPQ->size != 1) {
+        node1 = pq_dequeue(pPQ);
+        node2 = pq_dequeue(pPQ);
+
+        internalNode = create_node(-1,node1->weight + node2->weight);
+        
+        if(node1->weight < node2->weight) {
+            internalNode->left = node1;
+            internalNode->right = node2;
+        }
+        else {
+            internalNode->left = node2;
+            internalNode->right = node1;
+        }
+
+        pq_enqueue(pPQ, internalNode);
+    }
+
+    return pq_dequeue(pPQ);
 }
 
-Node* hufftree_free(Node* root) {
-    __THROW;
+void hufftree_free(Node* root) {
+    if(root->left != NULL) {
+        hufftree_free(root->left);
+    }
+    if(root->right != NULL) {
+        hufftree_free(root->right);
+    }
+    free(root);
+    return;
 }
