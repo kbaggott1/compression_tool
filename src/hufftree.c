@@ -3,7 +3,6 @@
 #include "freqtable.h"
 
 typedef struct Node {
-    struct Node* parent;
     struct Node* left;
     struct Node* right;
     char data;
@@ -68,7 +67,7 @@ Node* pq_dequeue(PriorityQueue* pPQ) {
 
     Node* node = pPQ->queue[0];
 
-    for(int i = 1; i < pPQ->size - 1; i++) {
+    for(int i = 1; i < pPQ->size; i++) {
         pPQ->queue[i - 1] = pPQ->queue[i];
     }
 

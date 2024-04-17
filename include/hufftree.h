@@ -3,7 +3,6 @@
 #include "freqtable.h"
 
 typedef struct Node {
-    struct Node* parent;
     struct Node* left;
     struct Node* right;
     char data;

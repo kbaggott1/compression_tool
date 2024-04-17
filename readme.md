@@ -36,12 +36,12 @@ Once the Huffman tree is constructed, the next step is to generate the codes for
 - Assign a '0' for every left branch and a '1' for every right branch.
 - The sequence of bits collected along the path from the root to a leaf node forms the code for the data item represented by that leaf.
 
-❌ Completed in this repo
+✅ Completed in this repo
 
 ## Step 4: Encoding Data 🔒
 Using the codes generated from the Huffman tree, replace each data item in the original dataset with its corresponding Huffman code. This encoded data is what gets stored or transmitted, achieving compression.
 
-❌ Completed in this repo
+✅ Completed in this repo
 
 ## Step 5: Decoding Data 🔓
 To decode the data encoded with Huffman coding, you simply need the encoded data and the Huffman tree.

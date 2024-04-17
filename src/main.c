@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "cmpr.h"
 #include <string.h>
+#include "bitwriter.h"
 #define COMPRESSED_EXT ".cmpr"
 
 char* read_line(FILE* pFile) {
@@ -67,44 +68,34 @@ char* get_file_contents(char* filePath) {
     return fileContents;
 }
 
-int write_to_file(char* filePath, char* fileContent) {
-    FILE* file = fopen(filePath, "w");
-
-    if(file == NULL) {
-        perror("Could not write to filepath");
-        return -1;
-    }
-
-    return fputs(fileContent, file);
-} 
-
 int main(int argc, char *argv[]) {
     char* fileContents;
     char* encodedContents;
     char* filePath;
     char* newFilePath;
 
+    // fileContents = get_file_contents("test.txt");
+    // encodedContents = cmpr_compress(fileContents);
     if( argc == 2 ) {
         filePath = argv[1];
+        
         printf("Compressing file %s\n", filePath);
         fileContents = get_file_contents(filePath);
 
         encodedContents = cmpr_compress(fileContents);
-        // newFilePath = malloc(strlen(filePath) + strlen(COMPRESSED_EXT) + 1);
+        newFilePath = malloc(strlen(filePath) + strlen(COMPRESSED_EXT) + 1);
 
-        // if(newFilePath == NULL) {
-        //     perror("Could not realloc mem for newFilePath");
-        //     return -1;
-        // }
+        if(newFilePath == NULL) {
+            perror("Could not realloc mem for newFilePath");
+            return -1;
+        }
 
-        // strcat(strcpy(newFilePath, filePath), COMPRESSED_EXT);
+        strcat(strcpy(newFilePath, filePath), COMPRESSED_EXT);
+        bit_write_to_file(newFilePath, encodedContents);
 
-        // write_to_file(newFilePath, encodedContents);
-
-        // free(fileContents);
-        // free(encodedContents);
-        // free(filePath);
-        // free(newFilePath);
+        free(fileContents);
+        free(encodedContents);
+        free(newFilePath);
     }
     else if( argc > 2 ) {
         printf("Too many arguments supplied.\n");

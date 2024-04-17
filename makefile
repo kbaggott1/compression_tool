@@ -12,3 +12,7 @@ SRCS=$(wildcard src/*.c)
 compile:
 	@[ -d "$(TARGET_DIR)" ] || mkdir -p "$(TARGET_DIR)"
 	$(CC) $(SRCS) -o $(TARGET) $(CFLAGS)
+
+debug:
+	@[ -d "$(TARGET_DIR)" ] || mkdir -p "$(TARGET_DIR)"
+	$(CC) -g $(SRCS) -o $(TARGET) $(CFLAGS)
